@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from app.users import views
+from users import views
 
 app_name = 'users'
 

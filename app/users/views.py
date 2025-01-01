@@ -1,7 +1,7 @@
 from rest_framework import generics
 
-from app.core.models import User
-from app.users.serializers import UserSerializer
+from core.models import User
+from users.serializers import UserSerializer
 
 
 class RegisterView(generics.CreateAPIView):
