@@ -19,12 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1an*5&i-=116gu6qi-bl1pg!z)sq4h5io_a$c8zp!4#ne)oa=('
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'changeme')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 # Application definition
 
@@ -77,7 +77,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': os.environ.get('POSTGRES_HOST'),
-        'NAME': os.environ.get('POSTGRES_NAME'),
+        'NAME': os.environ.get('POSTGRES_DB'),
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
     }
@@ -115,8 +115,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
+STATIC_URL = 'static/static/'
+MEDIA_URL = 'static/media/'
 
 MEDIA_ROOT = '/vol/web/media'
 STATIC_ROOT = '/vol/web/static'
